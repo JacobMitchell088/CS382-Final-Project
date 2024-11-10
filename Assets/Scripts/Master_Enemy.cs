@@ -4,57 +4,40 @@ using UnityEngine;
 
 public class Master_Enemy : MonoBehaviour
 {
-    public float moveSpeed = 3f;           // Enemy movement speed
-    public float attackRange = 1.5f;       // Distance within which the enemy will attack
-    public float attackCooldown = 2f;      // Cd time between attacks
+    public int damage = 10;
+    public float dps = 1.0f; // Damage interval in seconds
 
-    private Transform player;              // Reference to the player's transform
-    private float lastAttackTime = 0f;     // Track the last attack time
+    private PlayerController player;
+    private float damageTimer = 0f;
+    private bool isTouchingPlayer = false;
 
-    void Start()
+    private void Update()
     {
-        // Find the player by tag
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        if (isTouchingPlayer)
+        {
+            // Increment the timer
+            damageTimer += Time.deltaTime;
+
+            // Apply damage if the timer has reached the interval
+            if (damageTimer >= dps)
+            {
+                player.TakeDamage(damage);
+                damageTimer = 0f; // Reset timer after damage is applied
+            }
+        }
     }
 
-    void Update() 
+    public void StartDamageOverTime(PlayerController player)
     {
-        if (player != null) {
-            MoveTowardsPlayer();
-            TryAttackPlayer();
-        }
+        this.player = player;
+        isTouchingPlayer = true;
+        player.TakeDamage(damage); // Initial damage on contact
+        damageTimer = 0f; // Reset the timer for ongoing damage
     }
 
-
-    void MoveTowardsPlayer() {
-        // Calculate direction to player and move towards them
-        Vector3 direction = (player.position - transform.position).normalized;
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
-        if (distanceToPlayer > attackRange) {
-            // Move towards the player
-            Vector3 targetPosition = transform.position + direction * moveSpeed * Time.deltaTime;
-            targetPosition.y = 0f; // Ensure the enemy stays at y = 0
-            transform.position = targetPosition;
-
-            // Rotate enemy to face player
-            transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
-        }
-    }
-
-    void TryAttackPlayer() {
-
-        // Check distance to the player
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        
-        if (distanceToPlayer <= attackRange && Time.time >= lastAttackTime + attackCooldown) {
-            AttackPlayer();
-            lastAttackTime = Time.time; // Reset attack timer
-        }
-    }
-
-    void AttackPlayer() { // TODO
-        
-        Debug.Log("Enemy hits player");
+    public void StopDamageOverTime()
+    {
+        isTouchingPlayer = false;
+        damageTimer = 0f;
     }
 }
