@@ -103,8 +103,8 @@ public class PlayerStateMachine : MonoBehaviour
         _playerInput.CharacterControls.Run.started += OnRun;
         _playerInput.CharacterControls.Run.canceled += OnRun;
 
-        _playerInput.CharacterControls.Jump.started += OnJump;
-        _playerInput.CharacterControls.Jump.canceled += OnJump;
+        // _playerInput.CharacterControls.Jump.started += OnJump;
+        // _playerInput.CharacterControls.Jump.canceled += OnJump;
 
         setupJumpVariables();
     }
