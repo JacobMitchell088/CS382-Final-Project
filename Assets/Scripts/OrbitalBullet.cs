@@ -10,7 +10,6 @@ public class OrbitalBullet : MonoBehaviour
     {
         // Check if the object we collided with has the Enemy script
         Master_Enemy enemy = other.GetComponent<Master_Enemy>();
-        print("collided");
         if (enemy != null)
         {
             // Deal damage to the enemy
