@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/EnemyMovement.cs.meta
 guid: 8fe86f1c6ed8fef43bfb28b0f0fde4ca
+========
+guid: 3684503c0d1b22b488712814937b8d59
+>>>>>>>> origin/Movement+Enviorment:Assets/Scripts/BorderRestriction.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
