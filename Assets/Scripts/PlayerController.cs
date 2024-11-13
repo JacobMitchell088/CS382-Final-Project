@@ -1,19 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UI; // Required for using UI components
 
 public class PlayerController : MonoBehaviour
 {
     public int maxHealth = 100;
     public int currentHealth;
-    public Slider healthBar;
+    public Slider healthBar; // Reference to the health bar UI slider
 
+    private float damageCooldown = 1.0f; // Damage interval in seconds
+    private float lastDamageTime;
+    
     private void Start()
     {
         currentHealth = maxHealth;
-        healthBar.maxValue = maxHealth;
-        healthBar.value = currentHealth;
+
+        // Initialize the health bar
+        if (healthBar != null)
+        {
+            healthBar.maxValue = maxHealth;
+            healthBar.value = currentHealth;
+        }
+    }
+
+    private void Update()
+    {
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -21,26 +37,34 @@ public class PlayerController : MonoBehaviour
         Master_Enemy enemy = collision.gameObject.GetComponent<Master_Enemy>();
         if (enemy != null)
         {
-            enemy.StartDamageOverTime(this);
+            TakeDamage(enemy.contactDamage);
+            lastDamageTime = Time.time;
         }
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         Master_Enemy enemy = collision.gameObject.GetComponent<Master_Enemy>();
         if (enemy != null)
         {
-            enemy.StopDamageOverTime();
+            if (Time.time - lastDamageTime >= damageCooldown)
+            {
+                TakeDamage(enemy.damagePerSecond);
+                lastDamageTime = Time.time;
+            }
         }
     }
 
-    // Method for the enemy to call when applying damage
-    public void TakeDamage(int damage)
+    private void TakeDamage(int amount)
     {
-        currentHealth -= damage;
-        Debug.Log("Player took " + damage + " damage. Current health: " + currentHealth);
+        currentHealth -= amount;
+        Debug.Log("Player took " + amount + " damage. Current health: " + currentHealth);
 
-        healthBar.value = currentHealth;
+        // Update the health bar
+        if (healthBar != null)
+        {
+            healthBar.value = currentHealth;
+        }
 
         if (currentHealth <= 0)
         {
@@ -50,7 +74,6 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Player has died!");
-        // Implement death behavior (e.g., respawn, game over screen, etc.)
+        Debug.Log("Player has died.");
     }
 }

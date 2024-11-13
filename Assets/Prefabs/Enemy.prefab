@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 8754589743526712824}
   - component: {fileID: 8754589743526712825}
   - component: {fileID: 8754589743526712827}
-  - component: {fileID: 8754589743526712826}
   - component: {fileID: -3413269747609750789}
+  - component: {fileID: 3527058276538562520}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -32,7 +32,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8754589743526712819}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.27, y: 0, z: -11.62}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 69f160cf31f4acc49a290fb4f01bd8f7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -97,7 +97,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8754589743526712819}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -114,10 +114,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dfadf80ca3ad73478806fda543761c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  dps: 10
   maxHealth: 100
   currentHealth: 0
+  contactDamage: 10
+  damagePerSecond: 5
 --- !u!54 &8754589743526712825
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -156,19 +156,6 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &8754589743526712826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8754589743526712819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bce73d90f1cc7f4a845a7756eb20e67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3.5
 --- !u!114 &-3413269747609750789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,7 +168,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dfadf80ca3ad73478806fda543761c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  dps: 1
   maxHealth: 100
   currentHealth: 0
+  contactDamage: 10
+  damagePerSecond: 10
+--- !u!114 &3527058276538562520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8754589743526712819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fe86f1c6ed8fef43bfb28b0f0fde4ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3.5
