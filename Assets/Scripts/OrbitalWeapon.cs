@@ -18,6 +18,7 @@ public class OrbitalWeapon : MonoBehaviour
         {
             Vector3 newPos = player.position;
             newPos.y = newPos.y - yHeightOffset;
+
             transform.position = newPos;
             transform.Rotate(Vector3.up, orbitSpeed * Time.deltaTime);
         }
