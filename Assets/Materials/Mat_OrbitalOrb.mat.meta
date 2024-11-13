@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Materials/Mat_OrbitalOrb.mat.meta
+guid: 36525bb1a6032d54db521a056fc75340
+========
+guid: 8bbc505198f98af41873dbb347b1bb7b
+>>>>>>>> origin/Movement+Enviorment:Assets/CharacterFiles/Cowboy/Material/Mat_CowboyRIO.mat.meta
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
