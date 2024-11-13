@@ -100,12 +100,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7940719953895527930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3684503c0d1b22b488712814937b8d59, type: 3}
+  m_Script: {fileID: 11500000, guid: 91e8ad090538cfd48b5456675bc5a5a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerPos: {fileID: 5251107426523682287}
-  minBounds: {x: 24.4, y: 0, z: 3}
-  maxBounds: {x: 82, y: 0, z: 77}
+  minBounds: {x: 0, y: 0, z: 0}
+  maxBounds: {x: 0, y: 0, z: 0}
   smoothingSpeed: 10
 --- !u!1001 &8488196711846185449
 PrefabInstance:
