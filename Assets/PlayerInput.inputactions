@@ -17,7 +17,7 @@
                 {
                     "name": "Run",
                     "type": "Button",
-                    "id": "83d47d5f-5c02-4929-b32f-a092967b2b27",
+                    "id": "fddd51ff-7e94-4f8d-8e84-2d0227af2423",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -91,23 +91,23 @@
                 },
                 {
                     "name": "",
-                    "id": "7851b8aa-9005-47f4-b448-38fc657c2992",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Run",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "80fd9be6-2edc-4194-bee8-6ce3401de457",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6621d2e3-2856-4ca3-abb6-b54c195eb672",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Run",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
