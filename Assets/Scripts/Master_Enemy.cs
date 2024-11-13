@@ -11,6 +11,15 @@ public class Master_Enemy : MonoBehaviour
     private float damageTimer = 0f;
     private bool isTouchingPlayer = false;
 
+    // Stats
+    public float maxHealth = 100f;
+    public float currentHealth;
+
+    private void Start()
+    {
+        currentHealth = maxHealth;
+    }
+
     private void Update()
     {
         if (isTouchingPlayer)
@@ -39,5 +48,17 @@ public class Master_Enemy : MonoBehaviour
     {
         isTouchingPlayer = false;
         damageTimer = 0f;
+    }
+
+    // Method for bullets / objects to call to deal damage
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        Debug.Log("Enemy took " + damage + " damage. Current health: " + currentHealth);
+
+        if (currentHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
