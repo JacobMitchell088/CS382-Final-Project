@@ -5,10 +5,8 @@ using UnityEngine.UI; // Required for using UI components
 public class PlayerController : MonoBehaviour
 {
     public int maxHealth = 100;
-    public float currentHealth;
+    public int currentHealth;
     public Slider healthBar; // Reference to the health bar UI slider
-
-    private float damageCooldown = 1.0f; // Damage interval in seconds
     private float lastDamageTime;
 
     private bool isDead = false; // To check if the player is dead
@@ -34,31 +32,55 @@ public class PlayerController : MonoBehaviour
             Die();
         }
     }
-
-    private void OnCollisionEnter(Collision collision)
+    
+    private void OnTriggerEnter(Collider other)
     {
-        Master_Enemy enemy = collision.gameObject.GetComponent<Master_Enemy>();
-        if (enemy != null)
+        if (other.CompareTag("Enemy"))
         {
-            TakeDamage(enemy.contactDamage);
-            lastDamageTime = Time.time;
-        }
-    }
-
-    private void OnCollisionStay(Collision collision)
-    {
-        Master_Enemy enemy = collision.gameObject.GetComponent<Master_Enemy>();
-        if (enemy != null)
-        {
-            if (Time.time - lastDamageTime >= damageCooldown)
+            Master_Enemy enemy = other.GetComponent<Master_Enemy>();
+            if (enemy != null)
             {
-                TakeDamage(enemy.damagePerSecond);
-                lastDamageTime = Time.time;
+                //Debug.Log("Player collided with enemy, taking initial damage.");
+                // Take initial contact damage
+                TakeDamage(enemy.contactDamage);
+                lastDamageTime = Time.time; // Record the time of initial trigger enter
             }
         }
     }
 
-    public void TakeDamage(float amount)
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            Master_Enemy enemy = other.GetComponent<Master_Enemy>();
+            if (enemy != null)
+            {
+                // Check if 1 second has passed since last damage
+                if (Time.time - lastDamageTime >= 1.0f)
+                {
+                    //Debug.Log("Player in contact with enemy, taking damage per second.");
+                    // Take the enemy's specific damage per second
+                    TakeDamage(enemy.damagePerSecond);
+                    lastDamageTime = Time.time; // Update the last damage time
+                }
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            Master_Enemy enemy = other.GetComponent<Master_Enemy>();
+            if (enemy != null)
+            {
+                //Debug.Log("Player exited contact with enemy.");
+                // Reset the last damage time when exiting trigger
+                lastDamageTime = 0;
+            }
+        }
+    }
+    public void TakeDamage(int amount)
     {
         if (isDead) return; // If the player is dead, don't take damage
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OrbitalBullet : MonoBehaviour
 {
-    public float damage = 35f;
+    public int damage = 35;
 
     private void OnTriggerEnter(Collider other)
     {
