@@ -1,48 +1,97 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UI; // Required for using UI components
 
 public class PlayerController : MonoBehaviour
 {
     public int maxHealth = 100;
     public int currentHealth;
-    public Slider healthBar;
+    public Slider healthBar; // Reference to the health bar UI slider
+    private float lastDamageTime;
+
+    private bool isDead = false; // To check if the player is dead
+    private Rigidbody rb; // Player's Rigidbody for movement control (optional, if needed)
 
     private void Start()
     {
         currentHealth = maxHealth;
-        healthBar.maxValue = maxHealth;
-        healthBar.value = currentHealth;
-    }
+        rb = GetComponent<Rigidbody>(); // Get the player's Rigidbody if needed
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        Master_Enemy enemy = collision.gameObject.GetComponent<Master_Enemy>();
-        if (enemy != null)
+        // Initialize the health bar
+        if (healthBar != null)
         {
-            enemy.StartDamageOverTime(this);
+            healthBar.maxValue = maxHealth;
+            healthBar.value = currentHealth;
         }
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void Update()
     {
-        Master_Enemy enemy = collision.gameObject.GetComponent<Master_Enemy>();
-        if (enemy != null)
+        if (currentHealth <= 0 && !isDead)
         {
-            enemy.StopDamageOverTime();
+            Die();
+        }
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            Master_Enemy enemy = other.GetComponent<Master_Enemy>();
+            if (enemy != null)
+            {
+                // Take initial contact damage
+                TakeDamage(enemy.contactDamage);
+                lastDamageTime = Time.time; // Record the time of initial trigger enter
+            }
         }
     }
 
-    // Method for the enemy to call when applying damage
-    public void TakeDamage(int damage)
+    private void OnTriggerStay(Collider other)
     {
-        currentHealth -= damage;
-        Debug.Log("Player took " + damage + " damage. Current health: " + currentHealth);
+        if (other.CompareTag("Enemy"))
+        {
+            Master_Enemy enemy = other.GetComponent<Master_Enemy>();
+            if (enemy != null)
+            {
+                // Check if 1 second has passed since last damage
+                if (Time.time - lastDamageTime >= 1.0f)
+                {
+                    // Take the enemy's specific damage per second
+                    TakeDamage(enemy.damagePerSecond);
+                    lastDamageTime = Time.time; // Update the last damage time
+                }
+            }
+        }
+    }
 
-        healthBar.value = currentHealth;
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            Master_Enemy enemy = other.GetComponent<Master_Enemy>();
+            if (enemy != null)
+            {
+                // Reset the last damage time when exiting trigger
+                lastDamageTime = 0;
+            }
+        }
+    }
+    public void TakeDamage(int amount)
+    {
+       if (isDead) return; // If the player is dead, don't take damage
 
-        if (currentHealth <= 0)
+        currentHealth -= amount;
+        currentHealth = Mathf.Max(currentHealth, 0); // Prevent health from going below 0
+        Debug.Log("Player took " + amount + " damage. Current health: " + currentHealth);
+
+        // Update the health bar
+        if (healthBar != null)
+        {
+            healthBar.value = currentHealth;
+        }
+
+        if (currentHealth <= 0 && !isDead)
         {
             Die();
         }
@@ -50,7 +99,23 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Player has died!");
-        // Implement death behavior (e.g., respawn, game over screen, etc.)
+        isDead = true; // Set the death flag
+
+        Debug.Log("Player has died.");
+
+        // Play death animation or trigger game over
+        // Example: Play the death animation here if you have one
+        // animator.SetTrigger("Die");  // Uncomment if you have an Animator
+
+        // Disable movement (optional)
+        if (rb != null)
+        {
+            rb.isKinematic = true; // Disable Rigidbody-based movement
+        }
+
+        // Disable player controls or other necessary systems
+        // Example: Disable all controls or UI updates
+        // GetComponent<PlayerMovement>().enabled = false; // Disable movement script
+        // GetComponent<PlayerCombat>().enabled = false; // Disable combat script
     }
 }

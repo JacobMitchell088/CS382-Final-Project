@@ -39,7 +39,7 @@ public class OrbitalWeapon : MonoBehaviour
 
             // Instantiate the weapon prefab and set it as a child of the OrbitCenter
             GameObject weapon = Instantiate(weaponPrefab, transform.position + spawnPosition, Quaternion.identity, transform);
-            weapon.transform.LookAt(player);
+            //weapon.transform.LookAt(player);
         }
     }
 }
