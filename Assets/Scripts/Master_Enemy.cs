@@ -10,6 +10,7 @@ public class Master_Enemy : MonoBehaviour
     public int damagePerSecond = 10; // Continuous damage if in contact
     public EnemyMovement enemy;
     public GameObject expPrefab; // Reference to the experience prefab
+    public GameController gameController;
     private bool isDead;
 
     private void Start()
@@ -28,6 +29,15 @@ public class Master_Enemy : MonoBehaviour
             isDead = true;
             DropExperience(); // Call the method to drop experience
             enemy.Die(); // Enemy dies
+        }
+    }
+
+    private void OnDestroy()
+    {
+        // Notify GameController when this enemy is destroyed
+        if (gameController != null)
+        {
+            gameController.OnEnemyDestroyed();
         }
     }
 
