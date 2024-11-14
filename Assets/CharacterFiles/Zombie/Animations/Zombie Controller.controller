@@ -246,7 +246,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Golem Controller
+  m_Name: Zombie Controller
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: IsWalking
@@ -303,7 +303,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 200f945b5f2b5944bb356182f2591615, type: 2}
+  m_Motion: {fileID: 7400000, guid: 21510a3818fa39145abf76006bd56883, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -354,7 +354,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: bd67070f3cf6c5a438ecb78aae9aefe7, type: 2}
+  m_Motion: {fileID: 7400000, guid: da1a5d0725ad7f047b9852588e35e8ab, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -383,7 +383,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 7cdddd0499725be4cb9807ec101ad011, type: 2}
+  m_Motion: {fileID: 7400000, guid: 1487233ffe1058346a1cfa3e6c9e837d, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -412,7 +412,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: dd39670449a8a0e4498e337182b1a5ec, type: 2}
+  m_Motion: {fileID: 7400000, guid: 5d929155641d909488aacb46485f43e5, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
