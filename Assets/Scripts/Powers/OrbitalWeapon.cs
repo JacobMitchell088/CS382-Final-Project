@@ -42,4 +42,9 @@ public class OrbitalWeapon : MonoBehaviour
             //weapon.transform.LookAt(player);
         }
     }
+
+    public void Upgrade()
+    {
+        // TODO -- Upgrade weapon
+    }
 }

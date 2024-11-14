@@ -45,4 +45,9 @@ public class MeteorSpawner : MonoBehaviour
 
         return null;
     }
+
+    public void Upgrade()
+    {
+        // TODO -- Upgrade weapon
+    }
 }

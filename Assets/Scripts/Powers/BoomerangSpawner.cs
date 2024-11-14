@@ -50,4 +50,9 @@ public class BoomerangSpawner : MonoBehaviour
             currentActiveBullets--;
         }
     }
+
+    public void Upgrade()
+    {
+        // TODO -- Upgrade weapon
+    }
 }
