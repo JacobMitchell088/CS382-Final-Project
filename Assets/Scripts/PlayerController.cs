@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     private bool isDead = false; // To check if the player is dead
     private Rigidbody rb; // Player's Rigidbody for movement control (optional, if needed)
 
+    public ExpController expController; // Reference to the ExpController to handle experience
+
     private void Start()
     {
         currentHealth = maxHealth;
@@ -35,16 +37,32 @@ public class PlayerController : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
+        // Check if the player collides with an enemy
         if (other.CompareTag("Enemy"))
         {
             Master_Enemy enemy = other.GetComponent<Master_Enemy>();
             if (enemy != null)
             {
-                //Debug.Log("Player collided with enemy, taking initial damage.");
                 // Take initial contact damage
                 TakeDamage(enemy.contactDamage);
                 lastDamageTime = Time.time; // Record the time of initial trigger enter
             }
+        }
+        
+        // Check if the player collides with an experience object
+        if (other.CompareTag("EXP"))
+        {
+            // Assuming the experience object has a defined value (you can add this to your exp prefab)
+            int expAmount = other.GetComponent<ExpItem>().expValue;
+
+            // Add experience to the player's ExpController
+            if (expController != null)
+            {
+                expController.AddExperience(expAmount); // Add the experience
+            }
+
+            // Destroy the experience object after it's picked up
+            Destroy(other.gameObject); // Optionally, add a small effect before destroying
         }
     }
 
@@ -58,7 +76,6 @@ public class PlayerController : MonoBehaviour
                 // Check if 1 second has passed since last damage
                 if (Time.time - lastDamageTime >= 1.0f)
                 {
-                    //Debug.Log("Player in contact with enemy, taking damage per second.");
                     // Take the enemy's specific damage per second
                     TakeDamage(enemy.damagePerSecond);
                     lastDamageTime = Time.time; // Update the last damage time
@@ -74,12 +91,12 @@ public class PlayerController : MonoBehaviour
             Master_Enemy enemy = other.GetComponent<Master_Enemy>();
             if (enemy != null)
             {
-                //Debug.Log("Player exited contact with enemy.");
                 // Reset the last damage time when exiting trigger
                 lastDamageTime = 0;
             }
         }
     }
+
     public void TakeDamage(int amount)
     {
         if (isDead) return; // If the player is dead, don't take damage

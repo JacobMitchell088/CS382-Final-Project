@@ -9,11 +9,12 @@ public class Master_Enemy : MonoBehaviour
     public int contactDamage = 10; // Initial hit damage when in contact
     public int damagePerSecond = 10; // Continuous damage if in contact
     public EnemyMovement enemy;
-
-
+    public GameObject expPrefab; // Reference to the experience prefab
+    private bool isDead;
 
     private void Start()
     {
+        isDead = false;
         currentHealth = maxHealth;
         enemy = GetComponent<EnemyMovement>();
     }
@@ -22,10 +23,21 @@ public class Master_Enemy : MonoBehaviour
     public void TakeDamage(int amount)
     {
         currentHealth -= amount;
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && !isDead)
         {
-            enemy.Die();
+            isDead = true;
+            DropExperience(); // Call the method to drop experience
+            enemy.Die(); // Enemy dies
         }
     }
-    
+
+    // Method to drop experience
+    private void DropExperience()
+    {
+        if (expPrefab != null)
+        {
+            // Instantiate the expPrefab at the enemy's position
+            Instantiate(expPrefab, transform.position, Quaternion.identity);
+        }
+    }
 }

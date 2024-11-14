@@ -128,6 +128,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe08a46c1f206d14a9a929e8805257c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallSpeed: 30
+  fallSpeed: 60
   damage: 50
   impactRadius: 2

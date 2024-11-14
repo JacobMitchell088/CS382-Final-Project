@@ -501,6 +501,7 @@ MonoBehaviour:
   contactDamage: 10
   damagePerSecond: 5
   enemy: {fileID: 0}
+  expPrefab: {fileID: 3987042682442318487, guid: 89a4e36e6a272f343b0266863b391aa9, type: 3}
 --- !u!114 &5351925721910719457
 MonoBehaviour:
   m_ObjectHideFlags: 0
