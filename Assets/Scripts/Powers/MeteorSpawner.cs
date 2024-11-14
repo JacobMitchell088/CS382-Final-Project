@@ -45,4 +45,10 @@ public class MeteorSpawner : MonoBehaviour
 
         return null;
     }
+
+    public void Upgrade()
+    {
+        spawnInterval = spawnInterval / 2;
+        Debug.Log("Meteor Upgraded");
+    }
 }
