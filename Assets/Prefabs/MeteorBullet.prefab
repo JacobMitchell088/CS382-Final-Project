@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8596094391462664315}
   - component: {fileID: 6489589420785995328}
   - component: {fileID: 5206422349333478201}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MeteorBullet
   m_TagString: Player Projectile
   m_Icon: {fileID: 0}
