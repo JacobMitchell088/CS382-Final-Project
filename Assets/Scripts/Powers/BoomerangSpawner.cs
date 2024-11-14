@@ -10,7 +10,7 @@ public class BoomerangSpawner : MonoBehaviour
     public float spawnInterval = 2f;           // Time between bullet spawns
 
     private int currentActiveBullets = 0;      // Track active bullets
-    private float timer = 0f;                  // Timer to manage spawn intervals
+    private float timer = 0f;                 // Timer to manage spawn intervals
 
     private void Update()
     {

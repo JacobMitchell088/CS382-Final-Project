@@ -8372,7 +8372,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5464755549864149385, guid: 6a3c3c37133b6ae4d9590995c8166d88, type: 3}
   m_PrefabInstance: {fileID: 1575757904}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1662415639}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67f3fd9efdade774da6f0a6cdf09332b, type: 3}
@@ -8573,6 +8573,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5440707293445741943, guid: 494f6d43e170e9145bc7865d243ee00b, type: 3}
   m_PrefabInstance: {fileID: 1204731099}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1662415639 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7940719953895527930, guid: 6a3c3c37133b6ae4d9590995c8166d88, type: 3}
+  m_PrefabInstance: {fileID: 1575757904}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1662415645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662415639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36171392d9db0e542b6a7750cf660aab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boomerangBulletPrefab: {fileID: 7126658921163773527, guid: 989b313011e00f541aaa292863121d2e, type: 3}
+  player: {fileID: 1138816431}
+  boomerangCount: 3
+  spawnInterval: 2
 --- !u!4 &1666685712 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9069115365609054727, guid: 60f79905accf3b24fa0114b941f1aac0, type: 3}
