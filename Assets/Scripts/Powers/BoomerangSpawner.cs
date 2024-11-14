@@ -25,6 +25,8 @@ public class BoomerangSpawner : MonoBehaviour
 
     private void SpawnBullet()
     {
+        
+
         // Instantiate a new boomerang bullet near the player
         GameObject bullet = Instantiate(boomerangBulletPrefab, player.position, player.rotation);
 

@@ -115,10 +115,5 @@ public class PlayerController : MonoBehaviour
         {
             rb.isKinematic = true; // Disable Rigidbody-based movement
         }
-
-        // Disable player controls or other necessary systems
-        // Example: Disable all controls or UI updates
-        // GetComponent<PlayerMovement>().enabled = false; // Disable movement script
-        // GetComponent<PlayerCombat>().enabled = false; // Disable combat script
     }
 }
