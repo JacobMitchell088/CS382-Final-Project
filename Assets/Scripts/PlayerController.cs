@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
             Master_Enemy enemy = other.GetComponent<Master_Enemy>();
             if (enemy != null)
             {
+                //Debug.Log("Player collided with enemy, taking initial damage.");
                 // Take initial contact damage
                 TakeDamage(enemy.contactDamage);
                 lastDamageTime = Time.time; // Record the time of initial trigger enter
@@ -57,6 +58,7 @@ public class PlayerController : MonoBehaviour
                 // Check if 1 second has passed since last damage
                 if (Time.time - lastDamageTime >= 1.0f)
                 {
+                    //Debug.Log("Player in contact with enemy, taking damage per second.");
                     // Take the enemy's specific damage per second
                     TakeDamage(enemy.damagePerSecond);
                     lastDamageTime = Time.time; // Update the last damage time
@@ -72,6 +74,7 @@ public class PlayerController : MonoBehaviour
             Master_Enemy enemy = other.GetComponent<Master_Enemy>();
             if (enemy != null)
             {
+                //Debug.Log("Player exited contact with enemy.");
                 // Reset the last damage time when exiting trigger
                 lastDamageTime = 0;
             }
@@ -79,7 +82,7 @@ public class PlayerController : MonoBehaviour
     }
     public void TakeDamage(int amount)
     {
-       if (isDead) return; // If the player is dead, don't take damage
+        if (isDead) return; // If the player is dead, don't take damage
 
         currentHealth -= amount;
         currentHealth = Mathf.Max(currentHealth, 0); // Prevent health from going below 0

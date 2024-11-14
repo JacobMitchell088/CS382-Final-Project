@@ -2081,8 +2081,8 @@ GameObject:
   - component: {fileID: 2550935751187727211}
   - component: {fileID: 1226373471287947150}
   - component: {fileID: -8533154743188913260}
+  - component: {fileID: -9087579595850576610}
   - component: {fileID: 8131066996041767021}
-  - component: {fileID: 1610937020989322033}
   m_Layer: 0
   m_Name: Golem
   m_TagString: Enemy
@@ -2162,11 +2162,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dfadf80ca3ad73478806fda543761c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 500
   currentHealth: 0
   contactDamage: 10
-  damagePerSecond: 10
+  damagePerSecond: 5
   enemy: {fileID: 0}
+--- !u!114 &-9087579595850576610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9137032837993464747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fe86f1c6ed8fef43bfb28b0f0fde4ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  rotationSpeed: 5
+  attackRange: 2
+  attackDuration: 1
 --- !u!136 &8131066996041767021
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2180,20 +2196,4 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 3
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1610937020989322033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9137032837993464747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fe86f1c6ed8fef43bfb28b0f0fde4ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3.5
-  rotationSpeed: 5
-  attackRange: 2
-  attackDuration: 1
+  m_Center: {x: 0, y: 1, z: 0}
