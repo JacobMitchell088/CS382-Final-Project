@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class OrbitalBullet : MonoBehaviour
 {
-    public float damage = 35f;
+    public int damage = 35;
 
     private void OnTriggerEnter(Collider other)
     {
         // Check if the object we collided with has the Enemy script
+        Debug.Log("Bullet Collided");
         Master_Enemy enemy = other.GetComponent<Master_Enemy>();
         if (enemy != null)
         {
