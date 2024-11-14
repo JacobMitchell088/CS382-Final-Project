@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8754589743526712830}
   - component: {fileID: 8754589743526712829}
   - component: {fileID: 8754589743526712828}
-  - component: {fileID: 8754589743526712824}
   - component: {fileID: 8754589743526712825}
   - component: {fileID: 8754589743526712827}
   - component: {fileID: -3413269747609750789}
@@ -102,22 +101,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8754589743526712824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8754589743526712819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8dfadf80ca3ad73478806fda543761c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
-  contactDamage: 10
-  damagePerSecond: 5
 --- !u!54 &8754589743526712825
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -185,3 +168,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3.5
+  rotationSpeed: 5
+  attackRange: 2
+  attackDuration: 1
