@@ -13,7 +13,7 @@ public class OrbitalBullet : MonoBehaviour
         if (enemy != null)
         {
             // Deal damage to the enemy
-            //enemy.TakeDamage(damage);
+            enemy.TakeDamage(damage);
         }
     }
 }
