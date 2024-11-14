@@ -14,14 +14,7 @@ public class PlayerStateMachine : MonoBehaviour
     int _isWalkingHash;
     int _isRunningHash;
     int _isFallingHash;
-    int _WandAHash;
-    int _WandDHash;
-    int _SandAHash;
-    int _SandDHash;
-    int _WHash;
-    int _SHash;
-    int _AHash;
-    int _DHash;
+    int _isDeadHash;
 
     // variables to store player input values
     Vector2 _currentMovementInput;
@@ -69,17 +62,10 @@ public class PlayerStateMachine : MonoBehaviour
     public int JumpCount { get {return _jumpCount;} set {_jumpCount = value; } }
     public int IsWalkingHash { get {return _isWalkingHash; } }
     public int IsRunningHash { get {return _isRunningHash; } }
-    public int WandAHash { get {return _WandAHash; } }
-    public int WandDHash { get {return _WandDHash; } }
-    public int SandAHash { get {return _SandAHash; } }
-    public int SandDHash { get {return _SandDHash; } }
-    public int WHash { get {return _WHash; } }
-    public int SHash { get {return _SHash; } }
-    public int AHash { get {return _AHash; } }
-    public int DHash { get {return _DHash; } }
     public int IsFallingHash { get {return _isFallingHash; } }
     public int JumpCountHash { get {return _jumpCountHash; } }
     public int IsJumpingHash { get {return _isJumpingHash; } }
+    public int IsDeadHash { get {return _isDeadHash; } }
     public bool IsMovementPressed { get {return _isMovementPressed; } }
     public bool IsRunPressed { get {return _isRunPressed; } }
     public bool ReqiureNewJumpPress { get { return _reqiureNewJumpPress; } set { _reqiureNewJumpPress = value; } }
@@ -103,15 +89,8 @@ public class PlayerStateMachine : MonoBehaviour
         // set the parameter hash refrences
         _isWalkingHash = Animator.StringToHash("isWalking");
         _isRunningHash = Animator.StringToHash("isRunning");
-        _WandAHash = Animator.StringToHash("W&A");
-        _WandDHash = Animator.StringToHash("W&D");
-        _SandAHash = Animator.StringToHash("S&A");
-        _SandDHash = Animator.StringToHash("S&D");
-        _WHash = Animator.StringToHash("W");
-        _SHash = Animator.StringToHash("S");
-        _AHash = Animator.StringToHash("A");
-        _DHash = Animator.StringToHash("D");
         _isFallingHash = Animator.StringToHash("isFalling");
+        _isDeadHash = Animator.StringToHash("isDead");
         _isJumpingHash = Animator.StringToHash("isJumping");
         _jumpCountHash = Animator.StringToHash("jumpCount");
 

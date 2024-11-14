@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.17882866, g: 0.22391757, b: 0.30580145, a: 1}
+  m_IndirectSpecularColor: {r: 0.1788291, g: 0.22391814, b: 0.30580282, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1342,7 +1342,7 @@ Transform:
   m_Children:
   - {fileID: 48666932}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &217872289
 BoxCollider:
@@ -5339,10 +5339,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17b3cda59112c264d92cc59d194db475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 8754589743526712819, guid: eff3bcb8d701a9f4fac819b12aacc314, type: 3}
+  enemyPrefab: {fileID: 9137032837993464747, guid: d17733e023ee4794ca7a7f55abeafe46, type: 3}
   spawnRadius: 10
-  maxEnemies: 5
-  spawnInterval: 5
+  maxEnemies: 10
+  spawnInterval: 2.5
 --- !u!4 &969512521 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9069115365609054727, guid: 60f79905accf3b24fa0114b941f1aac0, type: 3}
@@ -5406,7 +5406,7 @@ Transform:
   - {fileID: 1235584335}
   - {fileID: 788693017}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1026568182
 PrefabInstance:
@@ -6835,6 +6835,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1241106864}
+  - component: {fileID: 1241106865}
   m_Layer: 0
   m_Name: OrbitalWeaponRoot
   m_TagString: Untagged
@@ -6855,8 +6856,26 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1241106865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241106862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8c7720f3dccbd348a44acdca80f422d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1138816431}
+  weaponPrefab: {fileID: 2078907307888264906, guid: cd87fa3075d404e478b7724bf64164c8, type: 3}
+  numberOfWeapons: 3
+  orbitRadius: 2
+  orbitSpeed: 50
+  yHeightOffset: 1
 --- !u!1001 &1243977737
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8025,10 +8044,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1840570758, guid: 6a3c3c37133b6ae4d9590995c8166d88, type: 3}
-      propertyPath: minBounds.x
-      value: 24.4
-      objectReference: {fileID: 0}
     - target: {fileID: 3959010817250969652, guid: 6a3c3c37133b6ae4d9590995c8166d88, type: 3}
       propertyPath: healthBar
       value: 
@@ -8080,6 +8095,10 @@ PrefabInstance:
     - target: {fileID: 7940719953895527930, guid: 6a3c3c37133b6ae4d9590995c8166d88, type: 3}
       propertyPath: m_Name
       value: Mage
+      objectReference: {fileID: 0}
+    - target: {fileID: 8615686011516332715, guid: 6a3c3c37133b6ae4d9590995c8166d88, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a3c3c37133b6ae4d9590995c8166d88, type: 3}
@@ -10231,7 +10250,7 @@ RectTransform:
   m_Children:
   - {fileID: 1116994907}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

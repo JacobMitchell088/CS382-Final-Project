@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OrbitalBullet : MonoBehaviour
 {
-    public int damage = 35;
+    public float damage = 35f;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -13,7 +13,8 @@ public class OrbitalBullet : MonoBehaviour
         if (enemy != null)
         {
             // Deal damage to the enemy
-            //enemy.TakeDamage(damage);
+            enemy.TakeDamage(damage);
+            Debug.Log("Enemy Damaged");
         }
     }
 }
