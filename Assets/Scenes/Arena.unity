@@ -7835,6 +7835,7 @@ GameObject:
   - component: {fileID: 1241106864}
   - component: {fileID: 1241106865}
   - component: {fileID: 1241106866}
+  - component: {fileID: 1241106867}
   m_Layer: 0
   m_Name: OrbitalWeaponRoot
   m_TagString: Untagged
@@ -7889,6 +7890,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meteorPrefab: {fileID: 164416, guid: de080a86d5586b5419efd9f3963be108, type: 3}
   spawnInterval: 1
+--- !u!114 &1241106867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241106862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eb5061f59a83f248820a97fe2fadeb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orbitalSpawner: {fileID: 1241106865}
+  boomerangSpawner: {fileID: 1575757911}
+  meteorSpawner: {fileID: 1241106866}
 --- !u!1001 &1243977737
 PrefabInstance:
   m_ObjectHideFlags: 0

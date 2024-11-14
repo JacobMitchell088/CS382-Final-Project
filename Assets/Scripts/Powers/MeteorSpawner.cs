@@ -48,6 +48,7 @@ public class MeteorSpawner : MonoBehaviour
 
     public void Upgrade()
     {
-        // TODO -- Upgrade weapon
+        spawnInterval = spawnInterval / 2;
+        Debug.Log("Meteor Upgraded");
     }
 }

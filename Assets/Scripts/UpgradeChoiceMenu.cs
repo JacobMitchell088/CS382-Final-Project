@@ -64,13 +64,13 @@ public class UpgradeChoiceMenu : MonoBehaviour
         switch (choice)
         {
             case 1:
-                ApplyUpgrade();  // Apply the specific upgrade for choice 1
+                WeaponManager.instance.OrbitalUpgrade(); 
                 break;
             case 2:
-                ApplyUpgrade();  // Apply the specific upgrade for choice 2
+                WeaponManager.instance.BoomerangUpgrade();  
                 break;
             case 3:
-                ApplyUpgrade();  // Apply the specific upgrade for choice 3
+                WeaponManager.instance.MeteorUpgrade();
                 break;
         }
 
@@ -78,11 +78,5 @@ public class UpgradeChoiceMenu : MonoBehaviour
         HideUpgradeMenu();
     }
 
-    // Example upgrade application - divide weapon spawn timer by 2
-    private void ApplyUpgrade()
-    {
-        // Implement logic to halve weapon spawn timer
-        Debug.Log("Upgrade applied: Weapon spawn timers reduced.");
-    }
 
 }

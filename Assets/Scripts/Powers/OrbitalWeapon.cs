@@ -46,5 +46,6 @@ public class OrbitalWeapon : MonoBehaviour
     public void Upgrade()
     {
         // TODO -- Upgrade weapon
+        Debug.Log("Orbital Upgraded");
     }
 }
