@@ -26,7 +26,6 @@ public class BoomerangBullet : MonoBehaviour
         position.y = yHeight;
         transform.position = position;
 
-
         // Check if the bullet has reached the max distance
         if (!returning && Vector3.Distance(startPoint, transform.position) >= maxDistance)
         {
