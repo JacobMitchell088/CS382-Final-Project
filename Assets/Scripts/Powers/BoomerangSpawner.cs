@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponSpawner : MonoBehaviour
+public class BoomerangSpawner : MonoBehaviour
 {
     public GameObject boomerangBulletPrefab;   // Prefab for the bullet
     public Transform player;                   // Reference to the player
