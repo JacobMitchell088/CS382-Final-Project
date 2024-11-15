@@ -195,7 +195,7 @@ public class PlayerStateMachine : MonoBehaviour
         _playerInput.CharacterControls.Enable();
     }
 
-    void OnDisable(){
+    public void OnDisable(){
         // disable the character controls action map
         _playerInput.CharacterControls.Disable();
     }

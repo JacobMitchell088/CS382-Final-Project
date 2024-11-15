@@ -13,7 +13,7 @@ public class WeaponManager : MonoBehaviour
     public MeteorSpawner meteorSpawner;
 
     private void Awake()
-    {
+    {   
         if (instance == null)
         {
             instance = this;
@@ -37,5 +37,10 @@ public class WeaponManager : MonoBehaviour
     public void MeteorUpgrade()
     {
         meteorSpawner?.Upgrade();
+    }
+    public void AllDisable(){
+       Destroy(orbitalSpawner);
+       Destroy(boomerangSpawner);
+       Destroy(meteorSpawner);
     }
 }

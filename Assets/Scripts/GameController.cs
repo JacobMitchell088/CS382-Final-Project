@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         // Start the game with an initial delay of 5 seconds
+        gameMusic = GetComponent<AudioSource>();
         StartCoroutine(StartWithDelay(5f));
     }
 
