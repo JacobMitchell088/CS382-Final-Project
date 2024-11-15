@@ -46,7 +46,8 @@ public class Master_Enemy : MonoBehaviour
 
         if (impactEffectPrefab != null)
         {
-            Instantiate(impactEffectPrefab, transform.position, Quaternion.identity);
+            GameObject impactEffect = Instantiate(impactEffectPrefab, transform.position, Quaternion.identity);
+            Destroy(impactEffect, 1f); // Destroy the VFX after 1s
         }
 
         StartCoroutine(FlashDamage());

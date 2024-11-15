@@ -6,7 +6,6 @@ public class MeteorBullet : MonoBehaviour
 {
     public float fallSpeed = 30f;       // Speed at which the meteor falls
     public int damage = 50;             // Damage dealt to the enemy on hit
-    public float impactRadius = 2f;     // Radius for area of effect aoe damage
 
     private void Update()
     {
@@ -16,7 +15,7 @@ public class MeteorBullet : MonoBehaviour
 
     private void Start() 
     {
-        Destroy(gameObject, 5f); // Lifespan of 5 to ensure actor is deleted
+        Destroy(gameObject, 3f); // Lifespan of 5 to ensure actor is deleted
     }
 
     private void OnTriggerEnter(Collider other)
@@ -33,7 +32,7 @@ public class MeteorBullet : MonoBehaviour
             }
 
             // Destroy the meteor on impact
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 

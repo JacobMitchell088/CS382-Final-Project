@@ -7878,7 +7878,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1138816431}
   weaponPrefab: {fileID: 2078907307888264906, guid: cd87fa3075d404e478b7724bf64164c8, type: 3}
-  numberOfWeapons: 3
+  numberOfWeapons: 0
   orbitRadius: 4
   orbitSpeed: 150
   yHeightOffset: 1
