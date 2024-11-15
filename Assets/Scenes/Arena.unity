@@ -9857,6 +9857,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5464755549864149385, guid: 6a3c3c37133b6ae4d9590995c8166d88, type: 3}
+      propertyPath: exponent
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5464755549864149385, guid: 6a3c3c37133b6ae4d9590995c8166d88, type: 3}
       propertyPath: expSlider
       value: 
       objectReference: {fileID: 126190661}
