@@ -10,7 +10,7 @@ public class ExpController : MonoBehaviour
     public TextMeshProUGUI levelText; // Reference to the TextMeshPro UI for level display
     public int baseValue = 100; // Base starting experience required for level 1
     public int growthFactor = 20; // Determines how fast experience grows
-    public float exponent = 1.5f; // Exponent to control the curve of experience growth
+    public float exponent = 3; // Exponent to control the curve of experience growth
     private int currentExp = 0; // Current experience
     private int level = 1; // Player's level
 

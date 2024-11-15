@@ -3,7 +3,13 @@ guid: 8dfadf80ca3ad73478806fda543761c9
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - enemy: {instanceID: 0}
+  - expPrefab: {instanceID: 0}
+  - gameController: {instanceID: 0}
+  - impactEffectPrefab: {instanceID: 0}
+  - healthBarPrefab: {instanceID: 0}
+  - hpMedkitPrefab: {fileID: 5981959855239236530, guid: 5eb2ce106e91bd944add6556f15274a5, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -28,6 +28,10 @@ public class Master_Enemy : MonoBehaviour
     private Vector3 healthBarOffset = new Vector3(0, 2f, 0); // Offset for health bar position above the enemy
     private GameObject healthBarObject; // To store the reference to the health bar GameObject
 
+    // Medkit
+    public GameObject hpMedkitPrefab; // Assign medkit prefab
+    public float hpMedkitSpawnChance = 0.01f;
+
     private void Start()
     {
         isDead = false;
@@ -54,8 +58,8 @@ public class Master_Enemy : MonoBehaviour
             if (canvas != null)
             {
                 // Instantiate the health bar prefab and set its parent to the canvas
-                healthBarObject = Instantiate(healthBarPrefab);
-                healthBarObject.transform.SetParent(canvas.transform, false); // Set the parent to the canvas
+                healthBarObject = Instantiate(healthBarPrefab, transform);
+                //healthBarObject.transform.SetParent(canvas.transform, false); // Set the parent to the canvas
 
                 // Try to find the Slider component in the instantiated health bar object
                 healthBarSlider = healthBarObject.GetComponentInChildren<Slider>();
@@ -90,13 +94,8 @@ public class Master_Enemy : MonoBehaviour
         if (healthBarSlider != null)
         {
             UpdateHealthBarPosition();
-            healthBarSlider.value = currentHealth; // Update the health bar value
-
-            if (currentHealth <= 0 && !isDead)
-            {
-                Die();
-            }
         }
+        
     }
 
     // Update the health bar's position in camera space
@@ -128,6 +127,12 @@ public class Master_Enemy : MonoBehaviour
 
         StartCoroutine(FlashDamage());
 
+
+        if (healthBarSlider != null) 
+        {
+            healthBarSlider.value = currentHealth; // Update the health bar value
+        }
+
         if (currentHealth <= 0 && !isDead)
         {
             Die(); // Call the death method when health reaches zero
@@ -145,7 +150,7 @@ public class Master_Enemy : MonoBehaviour
         // Make sure to clean up health bar if it exists
         if (healthBarObject != null)
         {
-            Destroy(healthBarObject); // Destroy the health bar object when the enemy is destroyed
+            Destroy(healthBarObject); 
         }
     }
 
@@ -176,12 +181,21 @@ public class Master_Enemy : MonoBehaviour
     {
         isDead = true;
         DropExperience(); // Call the method to drop experience
+        TrySpawnHPMedkit(); // Have a chance to spawn a medkit
         enemy.Die(); // Enemy dies
 
         // Destroy the health bar after the enemy dies
         if (healthBarObject != null)
         {
             Destroy(healthBarObject);
+        }
+    }
+
+    private void TrySpawnHPMedkit()
+    {
+        if (Random.value <= hpMedkitSpawnChance && hpMedkitPrefab != null)
+        {
+            Instantiate(hpMedkitPrefab, transform.position, Quaternion.identity);
         }
     }
 }

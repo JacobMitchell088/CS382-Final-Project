@@ -745,6 +745,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   expValue: 50
   rotationSpeed: 50
+  attractionRadius: 2.5
+  attractionSpeed: 20
 --- !u!65 &-6513183811035417972
 BoxCollider:
   m_ObjectHideFlags: 0

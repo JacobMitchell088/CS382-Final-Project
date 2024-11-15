@@ -7,10 +7,8 @@ public class MeteorSpawner : MonoBehaviour
     public GameObject meteorPrefab;     // Prefab for the meteor
     public float spawnInterval = 3f;    // Time between each meteor spawn
 
-    private void Start()
-    {
-        StartCoroutine(SpawnMeteors());
-    }
+    private bool startSpawning = false;  // Begin without spawning meteors
+    private Coroutine spawnCoroutine = null;
 
     private IEnumerator SpawnMeteors()
     {
@@ -48,7 +46,14 @@ public class MeteorSpawner : MonoBehaviour
 
     public void Upgrade()
     {
-        spawnInterval = spawnInterval / 2;
-        Debug.Log("Meteor Upgraded");
+        if (startSpawning == false && spawnCoroutine == null) // Haven't reached level 1 yet
+        {
+            spawnCoroutine = StartCoroutine(SpawnMeteors());
+        }
+        else 
+        {
+            spawnInterval /= 4;
+        }
+        //Debug.Log("Meteor Upgraded");
     }
 }
