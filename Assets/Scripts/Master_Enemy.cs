@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Master_Enemy : MonoBehaviour
 {
@@ -21,17 +21,12 @@ public class Master_Enemy : MonoBehaviour
     private Color originalColor;
     private Renderer enemyRenderer;
 
-    // HP Bar
-    public GameObject healthBarPrefab;      // The prefab of the health bar
-    public float healthBarOffsetY = 5.0f;   // Height of HP bar
-
-    private Transform healthBarTransform;   // Position where the health bar should appear
-    private GameObject healthBarInstance;   // Instance of the health bar
-    private Image healthBarFill;            // Reference to the fill image
-    private Camera mainCamera;              // Reference to camera
-
-
-
+    // Health bar
+    public GameObject healthBarPrefab; // Reference to the health bar prefab
+    private Slider healthBarSlider; // The Slider component for health bar
+    private Camera mainCamera; // Reference to the main camera
+    private Vector3 healthBarOffset = new Vector3(0, 2f, 0); // Offset for health bar position above the enemy
+    private GameObject healthBarObject; // To store the reference to the health bar GameObject
 
     private void Start()
     {
@@ -39,36 +34,85 @@ public class Master_Enemy : MonoBehaviour
         currentHealth = maxHealth;
         enemy = GetComponent<EnemyMovement>();
 
-        // Color flash
+        // Color flash setup
         enemyRenderer = GetComponentInChildren<Renderer>();
-        if (enemyRenderer != null) 
+        if (enemyRenderer != null)
         {
-        originalColor = enemyRenderer.material.color;
+            originalColor = enemyRenderer.material.color;
         }
         else
         {
             Debug.Log("No Renderer On Enemy");
         }
 
-        // Instantiate the health bar prefab and set it above the enemy
-        healthBarInstance = Instantiate(healthBarPrefab, transform.position, Quaternion.identity);
-        
-        healthBarTransform = healthBarInstance.transform;
-        
-        // Get reference to the fill image (assuming it's the first child of the health bar)
-        healthBarFill = healthBarInstance.transform.GetChild(0).GetComponent<Image>();
+        // Create and assign the health bar slider
+        if (healthBarPrefab != null)
+        {
+            // Use FindObjectOfType<Canvas>() instead of GameObject.Find("Canvas")
+            Canvas canvas = FindObjectOfType<Canvas>();
+            
+            if (canvas != null)
+            {
+                // Instantiate the health bar prefab and set its parent to the canvas
+                healthBarObject = Instantiate(healthBarPrefab);
+                healthBarObject.transform.SetParent(canvas.transform, false); // Set the parent to the canvas
 
+                // Try to find the Slider component in the instantiated health bar object
+                healthBarSlider = healthBarObject.GetComponentInChildren<Slider>();
+
+                // Null check for healthBarSlider before using it
+                if (healthBarSlider != null)
+                {
+                    // Set the health bar values
+                    healthBarSlider.maxValue = maxHealth; // Set max health
+                    healthBarSlider.value = currentHealth; // Set initial health value
+                }
+                else
+                {
+                    Debug.LogError("Health Bar Prefab does not have a Slider component in its children.");
+                }
+            }
+            else
+            {
+                Debug.LogError("Canvas not found in the scene. Please make sure there's a Canvas in the scene.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Health Bar Prefab is not assigned in the Inspector.");
+        }
 
         mainCamera = Camera.main;
     }
 
     private void Update()
     {
-        // Update the health bar position above the enemy
-        SetHealthBarPosition();
+        if (healthBarSlider != null)
+        {
+            UpdateHealthBarPosition();
+            healthBarSlider.value = currentHealth; // Update the health bar value
 
-        // Update health bar fill
-        healthBarFill.fillAmount = currentHealth / maxHealth;
+            if (currentHealth <= 0 && !isDead)
+            {
+                Die();
+            }
+        }
+    }
+
+    // Update the health bar's position in camera space
+    private void UpdateHealthBarPosition()
+    {
+        if (healthBarSlider != null && mainCamera != null)
+        {
+            // Position the health bar above the enemy in world space
+            Vector3 worldPosition = transform.position + healthBarOffset;
+
+            // Convert the world position to screen space
+            Vector3 screenPosition = mainCamera.WorldToScreenPoint(worldPosition);
+
+            // Set the position of the health bar on the canvas in screen space
+            healthBarSlider.transform.position = screenPosition;
+        }
     }
 
     // This method can be used to apply damage to the enemy
@@ -84,14 +128,9 @@ public class Master_Enemy : MonoBehaviour
 
         StartCoroutine(FlashDamage());
 
-
-
         if (currentHealth <= 0 && !isDead)
         {
-            isDead = true;
-            DropExperience(); // Call the method to drop experience
-            Destroy(healthBarInstance);
-            enemy.Die(); // Enemy dies
+            Die(); // Call the death method when health reaches zero
         }
     }
 
@@ -102,9 +141,11 @@ public class Master_Enemy : MonoBehaviour
         {
             gameController.OnEnemyDestroyed();
         }
-        if (healthBarInstance != null)
+
+        // Make sure to clean up health bar if it exists
+        if (healthBarObject != null)
         {
-            Destroy(healthBarInstance);
+            Destroy(healthBarObject); // Destroy the health bar object when the enemy is destroyed
         }
     }
 
@@ -130,28 +171,17 @@ public class Master_Enemy : MonoBehaviour
         enemyRenderer.material.color = originalColor;
     }
 
-    private void SetHealthBarPosition()
+    // Handle the enemy's death
+    private void Die()
     {
-        Vector3 enemyPosition = transform.position;
+        isDead = true;
+        DropExperience(); // Call the method to drop experience
+        enemy.Die(); // Enemy dies
 
-        // Add an offset on the Y axis (above the enemy)
-        Vector3 adjustedPosition = enemyPosition + new Vector3(0, healthBarOffsetY, 0);
-
-        // Convert world position to screen position
-        Vector3 screenPosition = mainCamera.WorldToScreenPoint(adjustedPosition);
-
-        healthBarInstance.transform.position = screenPosition;
-        // Check if the screen position is valid (not behind the camera)
-        if (screenPosition.z > 0)
+        // Destroy the health bar after the enemy dies
+        if (healthBarObject != null)
         {
-            // Position the health bar at the screen position, relative to the canvas
-            //healthBarInstance.transform.position = screenPosition;
-        }
-        else
-        {
-            // Optionally, handle the case where the enemy is off-screen (e.g., hide health bar)
-            //healthBarInstance.SetActive(false);
+            Destroy(healthBarObject);
         }
     }
-
 }
