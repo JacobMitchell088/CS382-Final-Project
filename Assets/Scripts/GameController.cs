@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour
     public float spawnIntervalDecrease = 0.5f; // Amount to decrease spawn interval every 5 waves
     public float minimumSpawnInterval = 1f; // Minimum limit for spawn interval to avoid too fast spawning
     public int enemiesPerBatch = 5; // Number of enemies to spawn at once in each batch
+    public AudioSource gameMusic;
 
     private int currentRound = 1;
     private int enemiesToSpawn;
@@ -18,8 +19,14 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        gameMusic = GetComponent<AudioSource>();
+        gameMusic.Play();
         // Start the game with an initial delay of 5 seconds
         StartCoroutine(StartWithDelay(5f));
+    }
+
+    private void Update() {
+        if (!gameMusic.isPlaying) {gameMusic.Play();}
     }
 
     private IEnumerator StartWithDelay(float delay)
