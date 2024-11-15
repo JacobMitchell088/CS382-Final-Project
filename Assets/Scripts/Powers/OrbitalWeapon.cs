@@ -11,6 +11,8 @@ public class OrbitalWeapon : MonoBehaviour
     public float orbitSpeed = 50f;       // Speed of the orbit
     public float yHeightOffset = 1;      // Y Height offset
 
+    private List<GameObject> weapons = new List<GameObject>(); // Keep track of spawned in orbital weps
+
     private void Update()
     {
         // Rotate the OrbitCenter around the player's position
@@ -30,6 +32,11 @@ public class OrbitalWeapon : MonoBehaviour
     }
 
     private void SpawnWeaponsAroundPlayer() {
+        foreach (var weapon in weapons)
+        {
+            Destroy(weapon);
+        }
+
         // Spawn a set number of weapons in a circular formation
         for (int i = 0; i < numberOfWeapons; i++)
         {
@@ -39,7 +46,7 @@ public class OrbitalWeapon : MonoBehaviour
 
             // Instantiate the weapon prefab and set it as a child of the OrbitCenter
             GameObject weapon = Instantiate(weaponPrefab, transform.position + spawnPosition, Quaternion.identity, transform);
-            //weapon.transform.LookAt(player);
+            weapons.Add(weapon);
         }
     }
 
@@ -47,5 +54,9 @@ public class OrbitalWeapon : MonoBehaviour
     {
         // TODO -- Upgrade weapon
         Debug.Log("Orbital Upgraded");
+        numberOfWeapons++;
+        orbitSpeed = orbitSpeed + 25; // Increase orbit speed by 25
+
+        SpawnWeaponsAroundPlayer();
     }
 }

@@ -22,7 +22,7 @@ public class MeteorSpawner : MonoBehaviour
             if (targetEnemy != null)
             {
                 // Spawn a meteor above the target enemy
-                Vector3 spawnPosition = targetEnemy.transform.position + new Vector3(0, 20f, 0);
+                Vector3 spawnPosition = targetEnemy.transform.position + new Vector3(0, 30f, 0);
                 Instantiate(meteorPrefab, spawnPosition, Quaternion.identity);
             }
 
