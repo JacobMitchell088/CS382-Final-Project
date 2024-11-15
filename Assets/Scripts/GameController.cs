@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro; // Add this to use TextMeshPro
 
 public class GameController : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class GameController : MonoBehaviour
     public float spawnIntervalDecrease = 0.5f; // Amount to decrease spawn interval every 5 waves
     public float minimumSpawnInterval = 1f; // Minimum limit for spawn interval to avoid too fast spawning
     public int enemiesPerBatch = 5; // Number of enemies to spawn at once in each batch
+    public TextMeshProUGUI roundText; // Reference to the TextMeshProUGUI component for displaying the round
 
     private int currentRound = 1;
     private int enemiesToSpawn;
@@ -18,8 +20,8 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        // Start the game with an initial delay of 5 seconds
-        StartCoroutine(StartWithDelay(5f));
+        UpdateRoundText(); // Update the round text at the start
+        StartCoroutine(StartWithDelay(5f)); // Start the game with an initial delay
     }
 
     private IEnumerator StartWithDelay(float delay)
@@ -33,6 +35,9 @@ public class GameController : MonoBehaviour
         // Increase the number of enemies to spawn each round
         enemiesToSpawn = initialEnemiesPerRound + currentRound * 2;
         enemiesRemaining = enemiesToSpawn;
+
+        // Update the round number on the screen
+        UpdateRoundText();
 
         // Every 5 rounds, reduce the spawn interval to increase difficulty
         if (currentRound % 5 == 0 && spawnInterval > minimumSpawnInterval)
@@ -94,6 +99,18 @@ public class GameController : MonoBehaviour
         {
             currentRound++;
             StartNewRound();
+        }
+    }
+
+    private void UpdateRoundText()
+    {
+        if (roundText != null)
+        {
+            roundText.text = $"Round: {currentRound}";
+        }
+        else
+        {
+            Debug.LogWarning("Round TextMeshProUGUI reference is missing!");
         }
     }
 }
