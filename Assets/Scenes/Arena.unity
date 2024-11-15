@@ -8344,6 +8344,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a3c3c37133b6ae4d9590995c8166d88, type: 3}
+<<<<<<< Updated upstream
+=======
+--- !u!114 &1575757905 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5464755549864149385, guid: 6a3c3c37133b6ae4d9590995c8166d88, type: 3}
+  m_PrefabInstance: {fileID: 1575757904}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972160380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67f3fd9efdade774da6f0a6cdf09332b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1575757911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972160380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36171392d9db0e542b6a7750cf660aab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boomerangBulletPrefab: {fileID: 5763322499728380051, guid: 0863b83e0e9950d4b993fcdbc9e3bca8, type: 3}
+  player: {fileID: 1138816431}
+  boomerangCount: 3
+  spawnInterval: 2
+>>>>>>> Stashed changes
 --- !u!1001 &1576763471
 PrefabInstance:
   m_ObjectHideFlags: 0
