@@ -104,7 +104,7 @@ public class EnemyMovement : MonoBehaviour
             isDead = true;
             animator.SetBool("IsDead", true);
             agent.isStopped = true; // Stop movement when dead
-            Destroy(gameObject, 2f); // Destroy after 2 seconds, or manage it how you like
+            Destroy(gameObject); // Destroy after 2 seconds, or manage it how you like
         }
     }
 }

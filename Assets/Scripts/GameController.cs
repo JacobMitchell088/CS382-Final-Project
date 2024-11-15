@@ -7,7 +7,9 @@ public class GameController : MonoBehaviour
     public List<GameObject> enemyPrefabs; // List of different enemy prefabs (tiers)
     public float spawnRadius = 10f; // Radius around the player for spawning enemies
     public int initialEnemiesPerRound = 10; // Initial number of enemies to spawn in the first round
-    public float spawnInterval = 5f; // Time interval between enemy spawns
+    public float spawnInterval = 5f; // Initial time interval between enemy spawns
+    public float spawnIntervalDecrease = 0.5f; // Amount to decrease spawn interval every 5 waves
+    public float minimumSpawnInterval = 1f; // Minimum limit for spawn interval to avoid too fast spawning
 
     private int currentRound = 1;
     private int enemiesToSpawn;
@@ -20,8 +22,16 @@ public class GameController : MonoBehaviour
 
     private void StartNewRound()
     {
-        enemiesToSpawn = initialEnemiesPerRound + currentRound * 2; // Increase enemies per round
+        // Increase the number of enemies to spawn each round
+        enemiesToSpawn = initialEnemiesPerRound + currentRound * 2;
         enemiesRemaining = enemiesToSpawn;
+
+        // Every 5 rounds, reduce the spawn interval to increase difficulty
+        if (currentRound % 5 == 0 && spawnInterval > minimumSpawnInterval)
+        {
+            spawnInterval = Mathf.Max(spawnInterval - spawnIntervalDecrease, minimumSpawnInterval);
+        }
+
         StartCoroutine(SpawnEnemies());
     }
 
@@ -36,7 +46,7 @@ public class GameController : MonoBehaviour
             SpawnEnemy(enemyPrefab);
             enemiesToSpawn--;
 
-            // Wait before spawning the next enemy
+            // Wait for the adjusted spawn interval before spawning the next enemy
             yield return new WaitForSeconds(spawnInterval);
         }
     }

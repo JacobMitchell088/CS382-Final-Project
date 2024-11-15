@@ -46,8 +46,9 @@ public class Master_Enemy : MonoBehaviour
     {
         if (expPrefab != null)
         {
+            Vector3 dropPosition = new Vector3(transform.position.x, 1, transform.position.z);
             // Instantiate the expPrefab at the enemy's position
-            Instantiate(expPrefab, transform.position, Quaternion.identity);
+            Instantiate(expPrefab, dropPosition, Quaternion.identity);
         }
     }
 }

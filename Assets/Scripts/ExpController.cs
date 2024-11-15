@@ -50,7 +50,7 @@ public class ExpController : MonoBehaviour
         // Optionally, reset experience or increase maxExp for the next level
         currentExp = 0; // Reset to zero or handle differently for each level
         
-        
+        expSlider.maxValue = CalculateMaxExp();
         
         if (UpgradeChoiceMenu.instance != null) {
             UpgradeChoiceMenu.instance.ShowUpgradeMenu(); // Allow the user to select their upgrade

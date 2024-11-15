@@ -6257,9 +6257,11 @@ MonoBehaviour:
   - {fileID: 2803820806472684270, guid: fcc7e72ef9922724c9dbe91fe1141293, type: 3}
   - {fileID: 1057498896775058261, guid: 5cf17f922b5c5f849b7819532c6c7593, type: 3}
   - {fileID: 9137032837993464747, guid: d17733e023ee4794ca7a7f55abeafe46, type: 3}
-  spawnRadius: 10
+  spawnRadius: 15
   initialEnemiesPerRound: 10
-  spawnInterval: 3
+  spawnInterval: 5
+  spawnIntervalDecrease: 0.5
+  minimumSpawnInterval: 0.5
 --- !u!4 &969512521 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9069115365609054727, guid: 60f79905accf3b24fa0114b941f1aac0, type: 3}
