@@ -113,6 +113,10 @@ public class PlayerController : MonoBehaviour
     // Reduce health and ensure it doesn't go below zero
     currentHealth -= amount;
     currentHealth = Mathf.Max(currentHealth, 0);
+    if (currentHealth > 100)
+    {
+        currentHealth = 100;
+    }
     Debug.Log($"Player took {amount} damage. Current health: {currentHealth}");
 
     // Update health bar UI if reference exists

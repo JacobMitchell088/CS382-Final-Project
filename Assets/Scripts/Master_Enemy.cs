@@ -28,6 +28,10 @@ public class Master_Enemy : MonoBehaviour
     private Vector3 healthBarOffset = new Vector3(0, 2f, 0); // Offset for health bar position above the enemy
     private GameObject healthBarObject; // To store the reference to the health bar GameObject
 
+    // Medkit
+    public GameObject hpMedkitPrefab; // Assign medkit prefab
+    public float hpMedkitSpawnChance = 0.01f;
+
     private void Start()
     {
         isDead = false;
@@ -90,10 +94,6 @@ public class Master_Enemy : MonoBehaviour
         if (healthBarSlider != null)
         {
             UpdateHealthBarPosition();
-        }
-        else 
-        {
-            Debug.Log("HB Slider null");
         }
         
     }
@@ -181,12 +181,21 @@ public class Master_Enemy : MonoBehaviour
     {
         isDead = true;
         DropExperience(); // Call the method to drop experience
+        TrySpawnHPMedkit(); // Have a chance to spawn a medkit
         enemy.Die(); // Enemy dies
 
         // Destroy the health bar after the enemy dies
         if (healthBarObject != null)
         {
             Destroy(healthBarObject);
+        }
+    }
+
+    private void TrySpawnHPMedkit()
+    {
+        if (Random.value <= hpMedkitSpawnChance && hpMedkitPrefab != null)
+        {
+            Instantiate(hpMedkitPrefab, transform.position, Quaternion.identity);
         }
     }
 }

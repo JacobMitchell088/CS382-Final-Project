@@ -507,6 +507,8 @@ MonoBehaviour:
   flashColor: {r: 1, g: 0, b: 0, a: 1}
   flashDuration: 0.1
   healthBarPrefab: {fileID: 3554785183076962073, guid: d5705cd9af262ff418f6d02be3678f1b, type: 3}
+  hpMedkitPrefab: {fileID: 5981959855239236530, guid: 5eb2ce106e91bd944add6556f15274a5, type: 3}
+  hpMedkitSpawnChance: 0.01
 --- !u!114 &5351925721910719457
 MonoBehaviour:
   m_ObjectHideFlags: 0
