@@ -1,17 +1,18 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI; // Required for using UI components
+using TMPro; // Required for TextMeshPro
 
 public class PlayerController : MonoBehaviour
 {
     public int maxHealth = 100;
     public int currentHealth;
     public Slider healthBar; // Reference to the health bar UI slider
-    private float lastDamageTime;
+    public TextMeshProUGUI healthText; // Reference to the health text display
 
+    private float lastDamageTime;
     private bool isDead = false; // To check if the player is dead
     private Rigidbody rb; // Player's Rigidbody for movement control (optional, if needed)
-
     public ExpController expController; // Reference to the ExpController to handle experience
 
     private void Start()
@@ -25,6 +26,9 @@ public class PlayerController : MonoBehaviour
             healthBar.maxValue = maxHealth;
             healthBar.value = currentHealth;
         }
+
+        // Update the initial health text
+        UpdateHealthText();
     }
 
     private void Update()
@@ -52,17 +56,16 @@ public class PlayerController : MonoBehaviour
         // Check if the player collides with an experience object
         if (other.CompareTag("EXP"))
         {
-            // Assuming the experience object has a defined value (you can add this to your exp prefab)
             int expAmount = other.GetComponent<ExpItem>().expValue;
 
             // Add experience to the player's ExpController
             if (expController != null)
             {
-                expController.AddExperience(expAmount); // Add the experience
+                expController.AddExperience(expAmount);
             }
 
             // Destroy the experience object after it's picked up
-            Destroy(other.gameObject); // Optionally, add a small effect before destroying
+            Destroy(other.gameObject);
         }
     }
 
@@ -78,7 +81,7 @@ public class PlayerController : MonoBehaviour
                 {
                     // Take the enemy's specific damage per second
                     TakeDamage(enemy.damagePerSecond);
-                    lastDamageTime = Time.time; // Update the last damage time
+                    lastDamageTime = Time.time;
                 }
             }
         }
@@ -88,21 +91,16 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            Master_Enemy enemy = other.GetComponent<Master_Enemy>();
-            if (enemy != null)
-            {
-                // Reset the last damage time when exiting trigger
-                lastDamageTime = 0;
-            }
+            lastDamageTime = 0;
         }
     }
 
     public void TakeDamage(int amount)
     {
-        if (isDead) return; // If the player is dead, don't take damage
+        if (isDead) return;
 
         currentHealth -= amount;
-        currentHealth = Mathf.Max(currentHealth, 0); // Prevent health from going below 0
+        currentHealth = Mathf.Max(currentHealth, 0);
         Debug.Log("Player took " + amount + " damage. Current health: " + currentHealth);
 
         // Update the health bar
@@ -110,6 +108,9 @@ public class PlayerController : MonoBehaviour
         {
             healthBar.value = currentHealth;
         }
+
+        // Update the health text
+        UpdateHealthText();
 
         if (currentHealth <= 0 && !isDead)
         {
@@ -119,18 +120,20 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
-        isDead = true; // Set the death flag
-
+        isDead = true;
         Debug.Log("Player has died.");
 
-        // Play death animation or trigger game over
-        // Example: Play the death animation here if you have one
-        // animator.SetTrigger("Die");  // Uncomment if you have an Animator
-
-        // Disable movement (optional)
         if (rb != null)
         {
-            rb.isKinematic = true; // Disable Rigidbody-based movement
+            rb.isKinematic = true;
+        }
+    }
+
+    private void UpdateHealthText()
+    {
+        if (healthText != null)
+        {
+            healthText.text = $"{currentHealth}/{maxHealth}";
         }
     }
 }

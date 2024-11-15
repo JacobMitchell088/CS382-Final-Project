@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     public float spawnInterval = 5f; // Initial time interval between enemy spawns
     public float spawnIntervalDecrease = 0.5f; // Amount to decrease spawn interval every 5 waves
     public float minimumSpawnInterval = 1f; // Minimum limit for spawn interval to avoid too fast spawning
+    public int enemiesPerBatch = 5; // Number of enemies to spawn at once in each batch
 
     private int currentRound = 1;
     private int enemiesToSpawn;
@@ -17,6 +18,13 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        // Start the game with an initial delay of 5 seconds
+        StartCoroutine(StartWithDelay(5f));
+    }
+
+    private IEnumerator StartWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         StartNewRound();
     }
 
@@ -39,14 +47,19 @@ public class GameController : MonoBehaviour
     {
         while (enemiesToSpawn > 0)
         {
-            // Spawn enemies based on current round, gradually introducing stronger types
-            int maxEnemyIndex = Mathf.Min(currentRound / 3, enemyPrefabs.Count - 1); // Limits tier based on round
-            GameObject enemyPrefab = enemyPrefabs[Random.Range(0, maxEnemyIndex + 1)];
+            // Spawn a batch of enemies
+            int enemiesThisBatch = Mathf.Min(enemiesPerBatch, enemiesToSpawn);
+            for (int i = 0; i < enemiesThisBatch; i++)
+            {
+                // Choose an enemy type based on current round, gradually introducing stronger types
+                int maxEnemyIndex = Mathf.Min(currentRound / 3, enemyPrefabs.Count - 1);
+                GameObject enemyPrefab = enemyPrefabs[Random.Range(0, maxEnemyIndex + 1)];
 
-            SpawnEnemy(enemyPrefab);
-            enemiesToSpawn--;
+                SpawnEnemy(enemyPrefab);
+                enemiesToSpawn--;
+            }
 
-            // Wait for the adjusted spawn interval before spawning the next enemy
+            // Wait for the adjusted spawn interval before spawning the next batch
             yield return new WaitForSeconds(spawnInterval);
         }
     }
@@ -62,9 +75,9 @@ public class GameController : MonoBehaviour
             return;
         }
 
-        // Generate a random position within the spawn radius around the player
-        Vector2 randomPos2D = Random.insideUnitCircle * spawnRadius;
-        Vector3 spawnPosition = player.transform.position + new Vector3(randomPos2D.x, 0, randomPos2D.y);
+        // Spawn at a random point on the perimeter of the spawn radius
+        float angle = Random.Range(0f, 2 * Mathf.PI);
+        Vector3 spawnPosition = player.transform.position + new Vector3(Mathf.Cos(angle) * spawnRadius, 0, Mathf.Sin(angle) * spawnRadius);
 
         // Instantiate the enemy and assign the GameController reference to it
         GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
