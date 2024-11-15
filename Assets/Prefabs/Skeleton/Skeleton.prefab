@@ -838,6 +838,7 @@ MonoBehaviour:
   impactEffectPrefab: {fileID: 7693270698138350265, guid: 2eb61e9d05baf374da1a4734737d8ebd, type: 3}
   flashColor: {r: 1, g: 0, b: 0, a: 1}
   flashDuration: 0.1
+  healthBarPrefab: {fileID: 3554785183076962073, guid: d5705cd9af262ff418f6d02be3678f1b, type: 3}
 --- !u!1 &2834232223631431927
 GameObject:
   m_ObjectHideFlags: 0
