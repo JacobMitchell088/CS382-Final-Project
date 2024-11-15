@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI; // Required for using UI components
+using UnityEngine.SceneManagement;
 using TMPro; // Required for TextMeshPro
 
 public class PlayerController : MonoBehaviour
@@ -10,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public Slider healthBar; // Reference to the health bar UI slider
     public TextMeshProUGUI healthText; // Reference to the health text display
     public AudioSource hitSound;
+    public Animator animator;
+    public PlayerStateMachine playerStateMachine;
 
     private float lastDamageTime;
     private bool isDead = false; // To check if the player is dead
@@ -21,6 +24,8 @@ public class PlayerController : MonoBehaviour
         currentHealth = maxHealth;
         rb = GetComponent<Rigidbody>(); // Get the player's Rigidbody if needed
         hitSound = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
+        playerStateMachine = GetComponent<PlayerStateMachine>();
 
         // Initialize the health bar
         if (healthBar != null)
@@ -33,7 +38,7 @@ public class PlayerController : MonoBehaviour
         UpdateHealthText();
     }
 
-    
+
     private void OnTriggerEnter(Collider other)
     {
         // Check if the player collides with an enemy
@@ -91,46 +96,48 @@ public class PlayerController : MonoBehaviour
             lastDamageTime = 0;
         }
     }
-
-    public void TakeDamage(int amount)
-    {
-        if (isDead) return;
-
-        currentHealth -= amount;
-        currentHealth = Mathf.Max(currentHealth, 0);
-        Debug.Log("Player took " + amount + " damage. Current health: " + currentHealth);
-
-        // Update the health bar
-        if (healthBar != null)
-        {
-            healthBar.value = currentHealth;
-        }
-
-        // Update the health text
-        UpdateHealthText();
-
-        if (currentHealth <= 0 && !isDead)
-        {
-            Die();
-        }
-    }
-
-    private void Die()
-    {
-        isDead = true;
-        Debug.Log("Player has died.");
-
-        if (rb != null)
-        {
-            rb.isKinematic = true;
-        }
-    }
-
+      
     private void UpdateHealthText()
     {
         if (healthText != null)
         {
             healthText.text = $"{currentHealth}/{maxHealth}";
         }
+    }
+
+    public void TakeDamage(int amount)
+{
+    // Prevent damage after death
+    if (isDead) return;
+
+    // Reduce health and ensure it doesn't go below zero
+    currentHealth -= amount;
+    currentHealth = Mathf.Max(currentHealth, 0);
+    Debug.Log($"Player took {amount} damage. Current health: {currentHealth}");
+
+    // Update health bar UI if reference exists
+    if (healthBar != null)
+    {
+        healthBar.value = currentHealth;
+    }
+
+    // Update the health text display
+    UpdateHealthText();
+
+    // Check if health is 0 or below (player dies)
+    if (currentHealth <= 0 && !isDead)
+    {
+        animator.SetBool("isDead", true);
+        WeaponManager.instance.AllDisable();
+        playerStateMachine.OnDisable(); // Disable player state machine
+        isDead = true; // Mark the player as dead
+        StartCoroutine(WaitForDeathAnimation()); // Start the coroutine to wait for death animation
+    }
+}
+    
+    private IEnumerator WaitForDeathAnimation() {
+        yield return new WaitForSeconds(3f); 
+
+        SceneManager.LoadScene("GameOver");
     }
 }
