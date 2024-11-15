@@ -834,6 +834,10 @@ MonoBehaviour:
   damagePerSecond: 10
   enemy: {fileID: 0}
   expPrefab: {fileID: 3987042682442318487, guid: 02cd5521d3972af4aa37489e7fb5888a, type: 3}
+  gameController: {fileID: 0}
+  impactEffectPrefab: {fileID: 7693270698138350265, guid: 2eb61e9d05baf374da1a4734737d8ebd, type: 3}
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashDuration: 0.1
 --- !u!1 &2834232223631431927
 GameObject:
   m_ObjectHideFlags: 0

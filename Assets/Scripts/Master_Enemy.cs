@@ -13,17 +13,46 @@ public class Master_Enemy : MonoBehaviour
     public GameController gameController;
     private bool isDead;
 
+    public GameObject impactEffectPrefab; // VFX Prefab
+    public Color flashColor = Color.red; // Color to flash on impact
+    public float flashDuration = 0.1f;
+    private Color originalColor;
+    private Renderer enemyRenderer;
+
+
+
     private void Start()
     {
         isDead = false;
         currentHealth = maxHealth;
         enemy = GetComponent<EnemyMovement>();
+
+        // Color flash
+        enemyRenderer = GetComponentInChildren<Renderer>();
+        if (enemyRenderer != null) 
+        {
+        originalColor = enemyRenderer.material.color;
+        }
+        else
+        {
+            Debug.Log("No Renderer On Enemy");
+        }
     }
 
     // This method can be used to apply damage to the enemy
     public void TakeDamage(int amount)
     {
         currentHealth -= amount;
+
+        if (impactEffectPrefab != null)
+        {
+            Instantiate(impactEffectPrefab, transform.position, Quaternion.identity);
+        }
+
+        StartCoroutine(FlashDamage());
+
+
+
         if (currentHealth <= 0 && !isDead)
         {
             isDead = true;
@@ -51,4 +80,16 @@ public class Master_Enemy : MonoBehaviour
             Instantiate(expPrefab, dropPosition, Quaternion.identity);
         }
     }
+
+    // Flash Damage
+    private IEnumerator FlashDamage()
+    {
+        // Change to flash color
+        enemyRenderer.material.color = flashColor;
+
+        yield return new WaitForSeconds(flashDuration);
+
+        enemyRenderer.material.color = originalColor;
+    }
+
 }
