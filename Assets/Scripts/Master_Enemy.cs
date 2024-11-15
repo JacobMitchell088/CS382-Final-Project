@@ -54,8 +54,8 @@ public class Master_Enemy : MonoBehaviour
             if (canvas != null)
             {
                 // Instantiate the health bar prefab and set its parent to the canvas
-                healthBarObject = Instantiate(healthBarPrefab);
-                healthBarObject.transform.SetParent(canvas.transform, false); // Set the parent to the canvas
+                healthBarObject = Instantiate(healthBarPrefab, transform);
+                //healthBarObject.transform.SetParent(canvas.transform, false); // Set the parent to the canvas
 
                 // Try to find the Slider component in the instantiated health bar object
                 healthBarSlider = healthBarObject.GetComponentInChildren<Slider>();
@@ -90,13 +90,12 @@ public class Master_Enemy : MonoBehaviour
         if (healthBarSlider != null)
         {
             UpdateHealthBarPosition();
-            healthBarSlider.value = currentHealth; // Update the health bar value
-
-            if (currentHealth <= 0 && !isDead)
-            {
-                Die();
-            }
         }
+        else 
+        {
+            Debug.Log("HB Slider null");
+        }
+        
     }
 
     // Update the health bar's position in camera space
@@ -128,6 +127,12 @@ public class Master_Enemy : MonoBehaviour
 
         StartCoroutine(FlashDamage());
 
+
+        if (healthBarSlider != null) 
+        {
+            healthBarSlider.value = currentHealth; // Update the health bar value
+        }
+
         if (currentHealth <= 0 && !isDead)
         {
             Die(); // Call the death method when health reaches zero
@@ -145,7 +150,7 @@ public class Master_Enemy : MonoBehaviour
         // Make sure to clean up health bar if it exists
         if (healthBarObject != null)
         {
-            Destroy(healthBarObject); // Destroy the health bar object when the enemy is destroyed
+            Destroy(healthBarObject); 
         }
     }
 

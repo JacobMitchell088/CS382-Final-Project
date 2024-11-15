@@ -33,13 +33,6 @@ public class PlayerController : MonoBehaviour
         UpdateHealthText();
     }
 
-    private void Update()
-    {
-        if (currentHealth <= 0 && !isDead)
-        {
-            Die();
-        }
-    }
     
     private void OnTriggerEnter(Collider other)
     {
