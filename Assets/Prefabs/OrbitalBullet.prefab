@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 1612807302}
   - component: {fileID: 3118135956951751901}
   - component: {fileID: 6770145661022457230}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: OrbitalBullet
-  m_TagString: Untagged
+  m_TagString: Player Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
