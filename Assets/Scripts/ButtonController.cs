@@ -2,20 +2,23 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
-public class PlayButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class ButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Image image;              // Reference to the Image component
     public Sprite defaultSprite;     // The sprite when not hovered
     public Sprite hoverSprite;       // The sprite when hovered
-    public string sceneName = "Arena"; // Default scene name, can be set in the Inspector
     public  AudioSource clickNoise;  // Reference to the AudioSource component  
+    public TextMeshProUGUI buttonText;
+    
     void Start()
     {
         if (image == null)
         {
             image = GetComponent<Image>();
             clickNoise = GetComponent<AudioSource>();
+            buttonText = GetComponentInChildren<TextMeshProUGUI>();
                 if (clickNoise != null) {
                     clickNoise.Stop(); // Ensure the audio doesn't play automatically on load
                 }
@@ -50,6 +53,22 @@ public class PlayButtonController : MonoBehaviour, IPointerEnterHandler, IPointe
     public void onClick()
     {
             clickNoise.Play();
-            SceneManager.LoadScene(sceneName);
+            string sceneToLoad = DetermineSceneBasedOnButtonText(buttonText.text);
+            SceneManager.LoadScene(sceneToLoad);
     }
+
+    private string DetermineSceneBasedOnButtonText(string buttonTextContent)
+    {
+        if (buttonTextContent == "Play" || buttonTextContent == "Try Again?") {
+            return "Arena";
+        }
+        else if (buttonTextContent == "Back to Start") {
+            return "Start";
+        }
+        else {
+            Debug.LogWarning("Unknown button text: " + buttonTextContent);
+            return null; // Default to the default scene if unknown
+        }
+    }
+
 }

@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
     public float minimumSpawnInterval = 1f; // Minimum limit for spawn interval to avoid too fast spawning
     public int enemiesPerBatch = 5; // Number of enemies to spawn at once in each batch
     public TextMeshProUGUI roundText; // Reference to the TextMeshProUGUI component for displaying the round
+    public AudioSource gameMusic;
 
     private int currentRound = 1;
     private int enemiesToSpawn;
@@ -20,8 +21,12 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        UpdateRoundText(); // Update the round text at the start
-        StartCoroutine(StartWithDelay(5f)); // Start the game with an initial delay
+        // Start the game with an initial delay of 5 seconds
+        StartCoroutine(StartWithDelay(5f));
+    }
+
+    private void Update() {
+        if (!gameMusic.isPlaying) {gameMusic.Play();}
     }
 
     private IEnumerator StartWithDelay(float delay)

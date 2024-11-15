@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public int currentHealth;
     public Slider healthBar; // Reference to the health bar UI slider
     public TextMeshProUGUI healthText; // Reference to the health text display
+    public AudioSource hitSound;
 
     private float lastDamageTime;
     private bool isDead = false; // To check if the player is dead
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
     {
         currentHealth = maxHealth;
         rb = GetComponent<Rigidbody>(); // Get the player's Rigidbody if needed
+        hitSound = GetComponent<AudioSource>();
 
         // Initialize the health bar
         if (healthBar != null)
@@ -49,6 +51,7 @@ public class PlayerController : MonoBehaviour
             {
                 // Take initial contact damage
                 TakeDamage(enemy.contactDamage);
+                hitSound.Play();
                 lastDamageTime = Time.time; // Record the time of initial trigger enter
             }
         }
@@ -81,6 +84,7 @@ public class PlayerController : MonoBehaviour
                 {
                     // Take the enemy's specific damage per second
                     TakeDamage(enemy.damagePerSecond);
+                    hitSound.Play();
                     lastDamageTime = Time.time;
                 }
             }
