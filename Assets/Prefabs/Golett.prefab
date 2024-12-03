@@ -472,7 +472,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -496,9 +496,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dfadf80ca3ad73478806fda543761c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 500
+  maxHealth: 750
   currentHealth: 0
-  contactDamage: 10
+  contactDamage: 30
   damagePerSecond: 5
   enemy: {fileID: 0}
   expPrefab: {fileID: 3987042682442318487, guid: 89a4e36e6a272f343b0266863b391aa9, type: 3}
@@ -521,7 +521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fe86f1c6ed8fef43bfb28b0f0fde4ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4.5
+  speed: 2.5
   rotationSpeed: 4
   attackRange: 2
   attackDuration: 1

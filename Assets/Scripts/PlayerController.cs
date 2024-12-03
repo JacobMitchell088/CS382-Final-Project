@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
     {
         if (healthText != null)
         {
-            healthText.text = $"{currentHealth}/{maxHealth}";
+            healthText.text = $"HP: {currentHealth}/{maxHealth}";
         }
     }
 

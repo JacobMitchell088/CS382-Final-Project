@@ -812,7 +812,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fe86f1c6ed8fef43bfb28b0f0fde4ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3.5
+  speed: 5
   rotationSpeed: 5
   attackRange: 1.5
   attackDuration: 1
@@ -828,9 +828,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dfadf80ca3ad73478806fda543761c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 50
   currentHealth: 0
-  contactDamage: 10
+  contactDamage: 25
   damagePerSecond: 10
   enemy: {fileID: 0}
   expPrefab: {fileID: 3987042682442318487, guid: 02cd5521d3972af4aa37489e7fb5888a, type: 3}
