@@ -2084,7 +2084,7 @@ GameObject:
   - component: {fileID: -9087579595850576610}
   - component: {fileID: 8131066996041767021}
   m_Layer: 8
-  m_Name: BossGolem
+  m_Name: Boss Golem
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2162,9 +2162,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dfadf80ca3ad73478806fda543761c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1000
+  maxHealth: 3000
   currentHealth: 0
-  contactDamage: 40
+  contactDamage: 50
   damagePerSecond: 5
   enemy: {fileID: 0}
   expPrefab: {fileID: 3987042682442318487, guid: 636075b98c8ebfc43bdac74194c55899, type: 3}
@@ -2187,7 +2187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fe86f1c6ed8fef43bfb28b0f0fde4ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 3
   rotationSpeed: 5
   attackRange: 2
   attackDuration: 1

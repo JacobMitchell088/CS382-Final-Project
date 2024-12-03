@@ -1411,9 +1411,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dfadf80ca3ad73478806fda543761c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 1000
   currentHealth: 0
-  contactDamage: 10
+  contactDamage: 50
   damagePerSecond: 10
   enemy: {fileID: 0}
   expPrefab: {fileID: 3987042682442318487, guid: 8aad5457c2c7668488552b10bdaeb564, type: 3}
