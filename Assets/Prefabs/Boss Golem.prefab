@@ -2167,7 +2167,7 @@ MonoBehaviour:
   contactDamage: 50
   damagePerSecond: 5
   enemy: {fileID: 0}
-  expPrefab: {fileID: 3987042682442318487, guid: 636075b98c8ebfc43bdac74194c55899, type: 3}
+  expPrefab: {fileID: 3987042682442318487, guid: 8ff97e56a5f544f48a90ecf8a80231ba, type: 3}
   gameController: {fileID: 0}
   impactEffectPrefab: {fileID: 7693270698138350265, guid: 2eb61e9d05baf374da1a4734737d8ebd, type: 3}
   flashColor: {r: 1, g: 0, b: 0, a: 1}
