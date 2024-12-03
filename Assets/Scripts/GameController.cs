@@ -6,6 +6,9 @@ using TMPro; // Add this to use TextMeshPro
 public class GameController : MonoBehaviour
 {
     public List<GameObject> enemyPrefabs; // List of different enemy prefabs (tiers)
+    public List<GameObject> bossPrefabs; // List of special boss enemy prefabs
+    public float bossHealthMultiplier = 1.0f; // Initial multiplier for boss health
+    public float bossHealthScaleIncrease = 0.2f; // Increment for health scaling each boss wave
     public float spawnRadius = 10f; // Radius around the player for spawning enemies
     public int initialEnemiesPerRound = 10; // Initial number of enemies to spawn in the first round
     public float spawnInterval = 5f; // Initial time interval between enemy spawns
@@ -18,16 +21,19 @@ public class GameController : MonoBehaviour
     private int currentRound = 1;
     private int enemiesToSpawn;
     private int enemiesRemaining; // Enemies left to be defeated to complete the round
+    private int bossRotation = 0;
 
     private void Start()
     {
         // Start the game with an initial delay of 5 seconds
         gameMusic = GetComponent<AudioSource>();
         StartCoroutine(StartWithDelay(5f));
+        bossRotation = 0;
     }
 
-    private void Update() {
-        if (!gameMusic.isPlaying) {gameMusic.Play();}
+    private void Update()
+    {
+        if (!gameMusic.isPlaying) { gameMusic.Play(); }
     }
 
     private IEnumerator StartWithDelay(float delay)
@@ -56,51 +62,71 @@ public class GameController : MonoBehaviour
 
     private IEnumerator SpawnEnemies()
     {
+        // Check if it's a boss wave
+        if (currentRound % 5 == 0 && bossPrefabs.Count > 0)
+        {
+            // Spawn a boss enemy
+            GameObject bossPrefab = bossPrefabs[bossRotation];
+            GameObject boss = SpawnEnemy(bossPrefab);
+
+            Master_Enemy bossEnemy = boss.GetComponent<Master_Enemy>();
+            if (bossEnemy != null)
+            {
+                bossEnemy.maxHealth = Mathf.RoundToInt(bossEnemy.maxHealth * bossHealthMultiplier);
+                bossEnemy.currentHealth = bossEnemy.maxHealth; // Update current health to match max
+            }
+
+            bossHealthMultiplier += bossHealthScaleIncrease;
+
+            enemiesToSpawn--; // Decrease count to reflect boss spawn
+            enemiesRemaining--; // A single boss counts toward enemies to defeat
+
+            bossRotation++;
+            if(bossRotation > 2) {
+                bossRotation = 0;
+            }
+        }
+
+        // Spawn regular enemies
         while (enemiesToSpawn > 0)
         {
-            // Spawn a batch of enemies
             int enemiesThisBatch = Mathf.Min(enemiesPerBatch, enemiesToSpawn);
             for (int i = 0; i < enemiesThisBatch; i++)
             {
-                // Choose an enemy type based on current round, gradually introducing stronger types
                 int maxEnemyIndex = Mathf.Min(currentRound / 3, enemyPrefabs.Count - 1);
                 GameObject enemyPrefab = enemyPrefabs[Random.Range(0, maxEnemyIndex + 1)];
-
                 SpawnEnemy(enemyPrefab);
                 enemiesToSpawn--;
             }
 
-            // Wait for the adjusted spawn interval before spawning the next batch
             yield return new WaitForSeconds(spawnInterval);
         }
     }
 
-    private void SpawnEnemy(GameObject enemyPrefab)
+    private GameObject SpawnEnemy(GameObject enemyPrefab)
     {
-        // Find the player GameObject
         GameObject player = GameObject.FindWithTag("Player");
 
         if (player == null)
         {
             Debug.LogWarning("Player not found!");
-            return;
+            return null;
         }
 
-        // Spawn at a random point on the perimeter of the spawn radius
         float angle = Random.Range(0f, 2 * Mathf.PI);
         Vector3 spawnPosition = player.transform.position + new Vector3(Mathf.Cos(angle) * spawnRadius, 0, Mathf.Sin(angle) * spawnRadius);
 
-        // Instantiate the enemy and assign the GameController reference to it
         GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
         enemy.GetComponent<Master_Enemy>().gameController = this; // Pass GameController reference to enemy
+
+        return enemy; // Return the spawned enemy
     }
 
-    // This method should be called by enemies when they are destroyed
+
     public void OnEnemyDestroyed()
     {
         enemiesRemaining--;
 
-        // If all enemies for the round are defeated, start the next round
         if (enemiesRemaining <= 0)
         {
             currentRound++;

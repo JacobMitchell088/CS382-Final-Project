@@ -2970,6 +2970,9 @@ MonoBehaviour:
   choiceOrbital: {fileID: 696220628}
   choiceBoomerang: {fileID: 1458339424}
   choiceMeteor: {fileID: 498290036}
+  descriptionOrbital: {fileID: 0}
+  descriptionBoomerang: {fileID: 0}
+  descriptionMeteor: {fileID: 0}
 --- !u!1 &506983861
 GameObject:
   m_ObjectHideFlags: 0
@@ -6550,7 +6553,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a907cee2d65b9ed4399b6b2f28fe8ba9, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.35
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
