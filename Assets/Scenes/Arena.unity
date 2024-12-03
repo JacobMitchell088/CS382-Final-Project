@@ -6812,7 +6812,7 @@ MonoBehaviour:
   - {fileID: 2803820806472684270, guid: 004cd4a029083b54680727e12b2e63ca, type: 3}
   - {fileID: 9137032837993464747, guid: 3c099203deff986419ce34ada7d581af, type: 3}
   bossHealthMultiplier: 1
-  bossHealthScaleIncrease: 0.5
+  bossHealthScaleIncrease: 0.75
   spawnRadius: 20
   initialEnemiesPerRound: 10
   spawnInterval: 5
