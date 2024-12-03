@@ -6683,7 +6683,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!20 &963194227
 Camera:
   m_ObjectHideFlags: 0
@@ -6807,6 +6807,12 @@ MonoBehaviour:
   - {fileID: 2803820806472684270, guid: fcc7e72ef9922724c9dbe91fe1141293, type: 3}
   - {fileID: 1057498896775058261, guid: 5cf17f922b5c5f849b7819532c6c7593, type: 3}
   - {fileID: 9137032837993464747, guid: d17733e023ee4794ca7a7f55abeafe46, type: 3}
+  bossPrefabs:
+  - {fileID: 6660184903045082040, guid: 0abc75797bb4ec9478572480b886be59, type: 3}
+  - {fileID: 2803820806472684270, guid: 004cd4a029083b54680727e12b2e63ca, type: 3}
+  - {fileID: 9137032837993464747, guid: 3c099203deff986419ce34ada7d581af, type: 3}
+  bossHealthMultiplier: 1
+  bossHealthScaleIncrease: 0.5
   spawnRadius: 20
   initialEnemiesPerRound: 10
   spawnInterval: 5
